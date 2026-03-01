@@ -45,15 +45,16 @@ document.addEventListener("DOMContentLoaded", () => {
      2. Lenis Smooth Scrolling Setup
      ========================================================================== */
   const lenis = new Lenis({
-    duration: 2.2, // Increased from 1.2 to slow down scrolling and make it feel more "laggy"/"smooth"
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    duration: 1.5, // Reduced for a more responsive feel
+    easing: (t) => Math.min(1, 1 - Math.pow(2, -10 * t)), // Standard ease-out
     direction: "vertical",
     gestureDirection: "vertical",
     smooth: true,
-    mouseMultiplier: 0.8, // Decreased so each mouse wheel turn scrolls less distance
+    mouseMultiplier: 1.2, // Increased slightly for normal distance
     smoothTouch: false,
     touchMultiplier: 2,
     infinite: false,
+    lerp: 0.1, // Added linear interpolation for buttery follow-through
   });
 
   function raf(time) {

@@ -247,6 +247,8 @@ h4 {
 .centered {
   margin-left: auto;
   margin-right: auto;
+  display: flex !important;
+  width: max-content;
 }
 .mt-3 {
   margin-top: 1.5rem;
@@ -829,6 +831,7 @@ h4 {
   height: 200px;
   position: relative;
   transform-style: preserve-3d;
+  will-change: transform;
   /* Rotation handled by GSAP */
 }
 
@@ -837,6 +840,7 @@ h4 {
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .coin-front,
