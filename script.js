@@ -1,5 +1,116 @@
+// Register GSAP Plugins
+gsap.registerPlugin(ScrollTrigger);
+
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Navigation Setup (Scroll effect)
+  /* ==========================================================================
+     1. Preloader Animation
+     ========================================================================== */
+  const tlPreloader = gsap.timeline({
+    onComplete: () => {
+      document.body.style.overflow = "auto";
+      initHeroAnimations();
+    },
+  });
+
+  // Temporarily lock scroll
+  document.body.style.overflow = "hidden";
+
+  tlPreloader
+    .to(".preloader-progress", {
+      width: "100%",
+      duration: 1.5,
+      ease: "power3.inOut",
+    })
+    .to(
+      ".preloader-content",
+      {
+        opacity: 0,
+        y: -20,
+        duration: 0.5,
+        ease: "power2.in",
+      },
+      "-=0.3",
+    )
+    .to(
+      ".preloader",
+      {
+        yPercent: -100,
+        duration: 1,
+        ease: "power4.inOut",
+      },
+      "-=0.1",
+    );
+
+  /* ==========================================================================
+     2. Lenis Smooth Scrolling Setup
+     ========================================================================== */
+  const lenis = new Lenis({
+    duration: 2.2, // Increased from 1.2 to slow down scrolling and make it feel more "laggy"/"smooth"
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    direction: "vertical",
+    gestureDirection: "vertical",
+    smooth: true,
+    mouseMultiplier: 0.8, // Decreased so each mouse wheel turn scrolls less distance
+    smoothTouch: false,
+    touchMultiplier: 2,
+    infinite: false,
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+
+  // Sync GSAP ScrollTrigger with Lenis
+  lenis.on("scroll", ScrollTrigger.update);
+
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+
+  gsap.ticker.lagSmoothing(0, 0);
+
+  /* ==========================================================================
+     3. Custom Cursor
+     ========================================================================== */
+  const cursorDot = document.querySelector(".cursor-dot");
+  const cursorOutline = document.querySelector(".cursor-outline");
+
+  window.addEventListener("mousemove", (e) => {
+    const posX = e.clientX;
+    const posY = e.clientY;
+
+    cursorDot.style.left = `${posX}px`;
+    cursorDot.style.top = `${posY}px`;
+
+    // Add a slight lag to the outline using GSAP for smoothness
+    gsap.to(cursorOutline, {
+      x: posX,
+      y: posY,
+      duration: 0.15,
+      ease: "power2.out",
+    });
+  });
+
+  // Cursor hover effects
+  const interactables = document.querySelectorAll("a, button, .card");
+
+  interactables.forEach((el) => {
+    el.addEventListener("mouseenter", () => {
+      cursorOutline.classList.add("cursor-hover");
+      cursorDot.style.opacity = "0";
+    });
+    el.addEventListener("mouseleave", () => {
+      cursorOutline.classList.remove("cursor-hover");
+      cursorDot.style.opacity = "1";
+    });
+  });
+
+  /* ==========================================================================
+     4. Navigation Scroll Effect
+     ========================================================================== */
   const navbar = document.querySelector(".navbar");
 
   window.addEventListener("scroll", () => {
@@ -10,75 +121,201 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 2. Intersection Observer for fade-in animations
-  const observerOptions = {
-    root: null,
-    rootMargin: "0px",
-    threshold: 0.15, // Trigger when 15% of the element is visible
-  };
+  /* ==========================================================================
+     5. Hero Animations (Fired after Preloader)
+     ========================================================================== */
+  function initHeroAnimations() {
+    // Split text for hero title
+    const heroTitle = new SplitType(".hero-title", { types: "words, chars" });
 
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        // Add the 'is-visible' class to trigger CSS animation
-        entry.target.classList.add("is-visible");
-        // Optional: stop observing once animated to keep it visible
-        observer.unobserve(entry.target);
-      }
+    const tlHero = gsap.timeline();
+
+    tlHero
+      .from(heroTitle.chars, {
+        opacity: 0,
+        y: 50,
+        rotateX: -90,
+        stagger: 0.02,
+        duration: 0.8,
+        ease: "back.out(1.7)",
+      })
+      .from(
+        ".hero-badge",
+        {
+          opacity: 0,
+          y: 20,
+          duration: 0.5,
+          ease: "power2.out",
+        },
+        "-=0.6",
+      )
+      .from(
+        ".hero-subtitle",
+        {
+          opacity: 0,
+          y: 20,
+          duration: 0.6,
+          ease: "power2.out",
+        },
+        "-=0.4",
+      )
+      .from(
+        ".hero-actions",
+        {
+          opacity: 0,
+          y: 20,
+          duration: 0.6,
+          ease: "power2.out",
+        },
+        "-=0.4",
+      )
+      .from(
+        ".hero-3d-element",
+        {
+          scale: 0,
+          opacity: 0,
+          duration: 1.2,
+          ease: "elastic.out(1, 0.5)",
+        },
+        "-=0.8",
+      );
+  }
+
+  /* ==========================================================================
+     6. Scroll Trigger Animations for Sections
+     ========================================================================== */
+  // Reveal Elements globally
+  const revealElements = document.querySelectorAll(".reveal-elem");
+
+  revealElements.forEach((elem) => {
+    gsap.from(elem, {
+      scrollTrigger: {
+        trigger: elem,
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      },
+      y: 30,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power3.out",
     });
-  }, observerOptions);
-
-  // Get all elements with animation classes
-  const animatedElements = document.querySelectorAll(".fade-in, .fade-in-up");
-
-  // Start observing them
-  animatedElements.forEach((el) => {
-    observer.observe(el);
   });
 
-  // 3. Simple Mobile Menu Toggle implementation (Expandability)
-  const mobileBtn = document.querySelector(".mobile-menu-btn");
-  const navLinks = document.querySelector(".nav-links");
+  // Stagger Cards in Infrastructure Section
+  gsap.from(".card", {
+    scrollTrigger: {
+      trigger: ".cards-grid",
+      start: "top 80%",
+    },
+    y: 50,
+    opacity: 0,
+    stagger: 0.15,
+    duration: 0.8,
+    ease: "power3.out",
+  });
 
-  if (mobileBtn && navLinks) {
-    mobileBtn.addEventListener("click", () => {
-      // Very basic toggle, could be expanded for a full mobile menu drawer
-      // For now it toggles a class on the button itself.
-      mobileBtn.classList.toggle("active");
+  // Solutions Cards Parallax effect
+  const solutionCards = document.querySelectorAll(".solution-card");
+  solutionCards.forEach((card, index) => {
+    gsap.to(card, {
+      scrollTrigger: {
+        trigger: ".solutions-grid",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
+      },
+      y: index % 2 === 0 ? -50 : 50, // Alternate directions for parallax
+      ease: "none",
+    });
+  });
 
-      // To properly implement a full mobile menu we would expand this
-      // but for a simple intro site, keeping it minimal initially.
-      if (mobileBtn.classList.contains("active")) {
-        // Future mobile menu logic here
-      }
+  /* ==========================================================================
+     7. Card Glow Hover Effect (Mouse Tracking)
+     ========================================================================== */
+  const cards = document.querySelectorAll(".glass-card");
+
+  cards.forEach((card) => {
+    const glow = card.querySelector(".card-glow");
+
+    if (glow) {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        glow.style.transform = `translate(${x - 150}px, ${y - 150}px)`;
+        glow.style.opacity = "1";
+      });
+
+      card.addEventListener("mouseleave", () => {
+        glow.style.opacity = "0";
+      });
+    }
+  });
+
+  /* ==========================================================================
+     8. Marquee Animation (Ecosystem Section)
+     ========================================================================== */
+  // Clone marquee items for infinite effect
+  const track = document.querySelector(".marquee-track");
+  if (track) {
+    const items = track.innerHTML;
+    track.innerHTML = items + items; // Duplicate content
+
+    gsap.to(".marquee-track", {
+      xPercent: -50,
+      ease: "none",
+      duration: 15,
+      repeat: -1,
     });
   }
 
-  // 4. Subtle Parallax effect on floating Background Glows
-  const glows = document.querySelectorAll(".bg-glow");
+  /* ==========================================================================
+     9. 3D Coin Rotation Effect (Scroll linked + Mouse)
+     ========================================================================== */
+  const coinContainer = document.querySelector(".coin-container");
+  const coin3d = document.querySelector(".coin-3d");
 
-  window.addEventListener("mousemove", (e) => {
-    const x = e.clientX / window.innerWidth;
-    const y = e.clientY / window.innerHeight;
-
-    glows.forEach((glow, index) => {
-      // Apply a slight transform based on mouse position
-      const speed = (index + 1) * 20;
-      const moveX = x * speed - speed / 2;
-      const moveY = y * speed - speed / 2;
-
-      glow.style.transform = `translate(${moveX}px, ${moveY}px)`;
+  if (coinContainer && coin3d) {
+    // Spin on scroll
+    gsap.to(coin3d, {
+      scrollTrigger: {
+        trigger: ".token-content",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
+      },
+      rotateY: 720,
+      ease: "none",
     });
-  });
 
-  // Run observer once manually to catch elements already in viewport on load
-  setTimeout(() => {
-    animatedElements.forEach((el) => {
-      const rect = el.getBoundingClientRect();
-      // If element is in viewport
-      if (rect.top < window.innerHeight && rect.bottom >= 0) {
-        el.classList.add("is-visible");
-      }
+    // Tilt on mouse move
+    coinContainer.addEventListener("mousemove", (e) => {
+      const rect = coinContainer.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -20;
+      const rotateY = ((x - centerX) / centerX) * 20;
+
+      gsap.to(coinContainer, {
+        rotateX: rotateX,
+        rotateY: rotateY,
+        duration: 0.5,
+        ease: "power2.out",
+      });
     });
-  }, 100);
+
+    coinContainer.addEventListener("mouseleave", () => {
+      gsap.to(coinContainer, {
+        rotateX: 0,
+        rotateY: 0,
+        duration: 1,
+        ease: "elastic.out(1, 0.3)",
+      });
+    });
+  }
 });

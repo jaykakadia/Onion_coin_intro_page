@@ -8,102 +8,139 @@
       name="description"
       content="Europe's leading Tokenization Engine. Explore our modular infrastructure for privacy and decentralized data framing."
     />
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
-    <!-- CSS Link -->
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Background Glow Elements (CSS generated) -->
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
+    <!-- Preloader -->
+    <div class="preloader">
+      <div class="preloader-content">
+        <div class="preloader-logo">(O)</div>
+        <div class="preloader-text">ONION</div>
+      </div>
+      <div class="preloader-bar"><div class="preloader-progress"></div></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Background Animation Elements -->
+    <div class="bg-gradient-mesh"></div>
+    <div class="glass-overlay"></div>
 
     <!-- Navigation -->
-    <nav class="navbar fade-in">
+    <nav class="navbar">
       <div class="container nav-container">
         <div class="logo">
           <span class="logo-icon">(O)</span>
-          ONION
+          <span class="logo-text">ONION</span>
         </div>
         <ul class="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#infrastructure">Infrastructure</a></li>
-          <li><a href="#ecosystem">Ecosystem</a></li>
-          <li><a href="#token">Token</a></li>
-          <li><a href="#blog">Blog</a></li>
+          <li><a href="#home" class="hover-underline">Home</a></li>
+          <li>
+            <a href="#infrastructure" class="hover-underline">Infrastructure</a>
+          </li>
+          <li><a href="#ecosystem" class="hover-underline">Ecosystem</a></li>
+          <li><a href="#token" class="hover-underline">Token</a></li>
         </ul>
         <div class="nav-actions">
-          <a href="#start" class="btn btn-primary">Start Now</a>
+          <a href="#start" class="btn btn-glow">
+            <span>Start Now</span>
+            <div class="glow-bg"></div>
+          </a>
         </div>
-        <!-- Mobile Menu Toggle -->
-        <button class="mobile-menu-btn" aria-label="Toggle menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
       </div>
     </nav>
 
     <main>
       <!-- Hero Section -->
-      <header id="home" class="hero section">
-        <div class="container hero-content fade-in">
-          <h1>Europe's Tokenization Engine</h1>
-          <p class="subtitle">
+      <section id="home" class="hero section">
+        <div class="container hero-content">
+          <div class="hero-badge reveal-elem">
+            <span class="badge-dot"></span> NEXT-GEN L2 NETWORK
+          </div>
+          <h1 class="hero-title">
+            Europe's <span class="text-neon-gradient">Tokenization</span> Engine
+          </h1>
+          <p class="hero-subtitle reveal-elem">
             ONION provides a fast, scaleable, and intuitive infrastructure for
             Web3 adoption. Powering everything from privacy to decentralization.
           </p>
-          <div class="hero-actions">
-            <a href="#buy" class="btn btn-primary btn-large">Buy Token</a>
+          <div class="hero-actions reveal-elem">
+            <a href="#buy" class="btn btn-primary btn-large">
+              <span>Buy Token</span>
+              <div class="glow-bg"></div>
+            </a>
+            <a href="#docs" class="btn btn-outline btn-large">Read Docs</a>
           </div>
         </div>
-      </header>
+
+        <!-- Animated 3D element in hero -->
+        <div class="hero-3d-element">
+          <div class="hologram-ring"></div>
+          <div class="hologram-ring ring-2"></div>
+          <div class="hologram-core">(O)</div>
+        </div>
+      </section>
 
       <!-- Infrastructure Section -->
       <section id="infrastructure" class="infrastructure section">
-        <div class="container fade-in">
-          <div class="section-badge">INFRASTRUCTURE</div>
-          <h2>A Modular Infrastructure built for performance</h2>
-          <p class="section-desc">
+        <div class="container">
+          <div class="section-badge reveal-elem">INFRASTRUCTURE</div>
+          <h2 class="section-title reveal-elem">
+            A Modular Infrastructure built for performance
+          </h2>
+          <p class="section-desc reveal-elem">
             Onion brings unmatched security and privacy via a unified and
             decentralized architectural framework, built for modern enterprises.
           </p>
 
-          <div class="cards-grid fade-in-up">
-            <div class="card hover-glow">
-              <div class="card-icon">
-                <span class="icon-hexagon">⬡</span>
+          <div class="cards-grid">
+            <div class="card glass-card hover-tilt">
+              <div class="card-glow"></div>
+              <div class="card-content">
+                <div class="card-icon">⬡</div>
+                <h3>Decentralized Identity</h3>
+                <p>
+                  Secure identity layers to manage users locally and efficiently
+                  on chain.
+                </p>
               </div>
-              <h3>Decentralized Identity</h3>
-              <p>
-                Secure identity layers to manage users locally and efficiently
-                on chain.
-              </p>
             </div>
-            <div class="card hover-glow card-featured">
-              <div class="card-icon">
-                <span class="icon-link">⛓</span>
+
+            <div class="card glass-card hover-tilt card-featured">
+              <div class="card-glow"></div>
+              <div class="card-content">
+                <div class="card-icon">⛓</div>
+                <h3>EVM-Compatible Network</h3>
+                <p>
+                  Fully compliant EVM framework allowing swift contract
+                  deployments.
+                </p>
+                <div class="featured-badge">PoS Mechanism</div>
               </div>
-              <h3>EVM-Compatible Network</h3>
-              <p>
-                Fully compliant EVM framework allowing swift contract
-                deployments.
-              </p>
             </div>
-            <div class="card hover-glow">
-              <div class="card-icon">
-                <span class="icon-shield">🛡</span>
+
+            <div class="card glass-card hover-tilt">
+              <div class="card-glow"></div>
+              <div class="card-content">
+                <div class="card-icon">🛡</div>
+                <h3>Privacy Modules</h3>
+                <p>
+                  Advanced routing techniques that disguise transactions and
+                  node footprints.
+                </p>
               </div>
-              <h3>Privacy Modules</h3>
-              <p>
-                Advanced routing techniques that disguise transactions and node
-                footprints.
-              </p>
             </div>
           </div>
         </div>
@@ -111,29 +148,35 @@
 
       <!-- Solutions Section -->
       <section id="solutions" class="solutions section">
-        <div class="container fade-in">
+        <div class="container">
           <div class="solutions-grid">
-            <div class="card solution-card hover-glow">
-              <h3>Advanced On-Chain Solutions</h3>
-              <p>
-                Build the next generation of financial solutions leveraging
-                Onion's multi-layered network primitives.
-              </p>
-              <div class="solution-visual">
-                <div class="glow-ring">
-                  <span>(O)</span>
+            <div class="solution-card glass-card reveal-elem">
+              <div class="card-glow"></div>
+              <div class="card-content">
+                <h3>Advanced On-Chain Solutions</h3>
+                <p>
+                  Build the next generation of financial solutions leveraging
+                  Onion's multi-layered network primitives.
+                </p>
+                <div class="solution-visual">
+                  <div class="orb-visual"></div>
                 </div>
               </div>
             </div>
-            <div class="card solution-card hover-glow">
-              <h3>Institutional Grade</h3>
-              <p>
-                High compliance throughput specifically tailored for large
-                financial institutions.
-              </p>
-              <div class="solution-visual">
-                <div class="glow-lock">
-                  <span>🔒</span>
+
+            <div class="solution-card glass-card reveal-elem">
+              <div class="card-glow"></div>
+              <div class="card-content">
+                <h3>Institutional Grade</h3>
+                <p>
+                  High compliance throughput specifically tailored for large
+                  financial institutions.
+                </p>
+                <div class="solution-visual">
+                  <div class="lock-visual">
+                    <div class="lock-body"></div>
+                    <div class="lock-shackle"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -142,91 +185,109 @@
       </section>
 
       <!-- Ecosystem Section -->
-      <section id="ecosystem" class="ecosystem section">
-        <div class="container fade-in">
-          <div class="section-badge">ECOSYSTEM</div>
-          <h2>The ONION Ecosystem</h2>
+      <section id="ecosystem" class="ecosystem section marquee-section">
+        <div class="section-badge reveal-elem centered">ECOSYSTEM</div>
+        <h2 class="section-title reveal-elem text-center">
+          The ONION Ecosystem
+        </h2>
 
-          <div class="eco-grid fade-in-up">
-            <div class="eco-card hover-border">
-              <div class="eco-icon">💼</div>
-              <h4>DeFi Swap</h4>
-              <p>Instant token swaps with deep liquidity pools.</p>
+        <!-- Infinite Marquee -->
+        <div class="marquee-wrapper mt-5">
+          <div class="marquee-track">
+            <div class="marquee-item">
+              <span class="m-icon">💼</span> DeFi Swap
             </div>
-            <div class="eco-card hover-border">
-              <div class="eco-icon">🌐</div>
-              <h4>Node Validators</h4>
-              <p>Join our decentralized validator architecture.</p>
+            <div class="marquee-item">
+              <span class="m-icon">🌐</span> Node Validators
             </div>
-            <div class="eco-card hover-border">
-              <div class="eco-icon">📊</div>
-              <h4>Analytics Dashboard</h4>
-              <p>Real-time analytics for your tokens.</p>
+            <div class="marquee-item">
+              <span class="m-icon">📊</span> Analytics
             </div>
-            <div class="eco-card hover-border">
-              <div class="eco-icon">🌉</div>
-              <h4>Cross-chain Bridge</h4>
-              <p>Easily port assets across chains.</p>
+            <div class="marquee-item">
+              <span class="m-icon">🌉</span> Bridge
+            </div>
+            <!-- Duplicates for infinite scroll -->
+            <div class="marquee-item">
+              <span class="m-icon">💼</span> DeFi Swap
+            </div>
+            <div class="marquee-item">
+              <span class="m-icon">🌐</span> Node Validators
+            </div>
+            <div class="marquee-item">
+              <span class="m-icon">📊</span> Analytics
+            </div>
+            <div class="marquee-item">
+              <span class="m-icon">🌉</span> Bridge
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Tokenomics / Coin Section -->
+      <!-- Tokenomics Section -->
       <section id="token" class="token section text-center">
-        <div class="container fade-in">
-          <div class="section-badge text-center">TOKENOMICS</div>
-          <h2>
-            The ONION Token <span class="text-neon">powers</span> the ecosystem,
-            driving transactions & governance.
-          </h2>
-          <div class="coin-visual">
-            <div class="floating-coin glow-effect">
-              <div class="coin-face">(O)</div>
-            </div>
-            <div class="coin-shadow"></div>
-          </div>
+        <div class="container">
+          <div class="token-content glass-card reveal-elem">
+            <div class="card-glow"></div>
+            <div class="card-content">
+              <div class="section-badge">TOKENOMICS</div>
+              <h2>
+                The ONION Token
+                <span class="text-neon-gradient">powers</span> the ecosystem.
+              </h2>
 
-          <div class="token-cta mt-4">
-            <p class="text-muted">
-              ONION is the core token governing the future of decentralization
-              on our layer 2 network.
-            </p>
-            <a href="#buy" class="btn btn-primary mt-3">Buy ONION</a>
+              <div class="coin-showcase">
+                <div class="coin-container">
+                  <div class="coin-3d">
+                    <div class="coin-front">(O)</div>
+                    <div class="coin-back">(O)</div>
+                    <div class="coin-edge"></div>
+                  </div>
+                </div>
+                <div class="coin-shadow-floor"></div>
+              </div>
+
+              <p class="token-desc">
+                Governing the future of decentralization on our layer 2 network.
+              </p>
+              <a href="#buy" class="btn btn-primary btn-large mt-3">
+                <span>Buy ONION</span>
+                <div class="glow-bg"></div>
+              </a>
+            </div>
           </div>
         </div>
       </section>
     </main>
 
     <!-- Footer -->
-    <footer class="footer fade-in">
+    <footer class="footer">
       <div class="container footer-container">
-        <div class="footer-col brand-col">
+        <div class="footer-col brand-col reveal-elem">
           <div class="logo">
             <span class="logo-icon">(O)</span>
-            ONION
+            <span>ONION</span>
           </div>
-          <p>Europe's leading Web3 framework.</p>
+          <p>
+            Europe's leading Web3 framework scaling the decentralized economy.
+          </p>
         </div>
-        <div class="footer-col">
+        <div class="footer-col reveal-elem">
           <h4>Ecosystem</h4>
           <ul class="footer-links">
-            <li><a href="#">Network</a></li>
-            <li><a href="#">Validators</a></li>
-            <li><a href="#">Tokenomics</a></li>
-            <li><a href="#">Careers</a></li>
+            <li><a href="#" class="hover-underline">Network</a></li>
+            <li><a href="#" class="hover-underline">Validators</a></li>
+            <li><a href="#" class="hover-underline">Tokenomics</a></li>
           </ul>
         </div>
-        <div class="footer-col">
+        <div class="footer-col reveal-elem">
           <h4>Legal</h4>
           <ul class="footer-links">
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">Disclaimer</a></li>
+            <li><a href="#" class="hover-underline">Privacy Policy</a></li>
+            <li><a href="#" class="hover-underline">Terms of Service</a></li>
           </ul>
         </div>
-        <div class="footer-col">
-          <h4>Social</h4>
+        <div class="footer-col reveal-elem">
+          <h4>Socials</h4>
           <div class="social-links">
             <a href="#" class="social-icon">X</a>
             <a href="#" class="social-icon">TG</a>
@@ -234,12 +295,18 @@
           </div>
         </div>
       </div>
-      <div class="footer-bottom">
+      <div class="footer-bottom reveal-elem">
         <p>&copy; 2026 Onion Coin. All rights reserved.</p>
       </div>
     </footer>
 
-    <!-- App Script -->
+    <!-- Libraries -->
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+
+    <!-- Custom Scripts -->
     <script src="script.js"></script>
   </body>
 </html>
